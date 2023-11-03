@@ -1,44 +1,44 @@
-# Thales Open Source Template Project
+# Federated Learning Frameworks
 
-Template for creating a new project in the [Thales GitHub organization](https://github.com/ThalesGroup).
+## Description
 
-Each Thales OSS project repository **MUST** contain the following files at the root:
+This repository contains tests made by Yasmine Chaouche during her intership at ThereSIS on different Federated Learning frameworks ([Flower](https://github.com/adap/flower), [NVFlare](https://github.com/NVIDIA/NVFlare/tree/main) and [EasyFL](https://github.com/EasyFL-AI/EasyFL)).
 
-- a `LICENSE` which has been chosen in accordance with legal department depending on your needs
 
-- a `README.md` outlining the project goals, sponsoring sig, and community contact information, [GitHub tips about README.md](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-readmes)
+## Usage
 
-- a `CONTRIBUTING.md` outlining how to contribute to the project, how to submit a pull request and an issue
+Each folder is dedicated at one framework, then each sub-folder contains a specific use-case. The Flower and NvFlare frameworks are the ones that have been the more tested.
 
-- a `SECURITY.md` outlining how the security concerns are handled, [GitHub tips about SECURITY.md](https://docs.github.com/en/github/managing-security-vulnerabilities/adding-a-security-policy-to-your-repository)
+We recommend to start with NvFlare/nvflare_remote_fl and Flower/flower_with_containers as their readme explain how install and use the framework.
 
-Below is an example of the common structure and information expected in a README.
+## Support
 
-**Please keep this structure as is and only fill the content for each section according to your project.**
+By mail: alice.heliou@thalesgroup.com, yasmine.chaouche@etu.u-pec.fr, vincent.thouvenot@thalesgroup.com
 
-If you need assistance or have question, please contact oss@thalesgroup.com
-
-## Get started
-
-XXX project purpose it to ...
-
-**Please also add the description into the About section (Description field)**
-
-## Documentation
-
-Documentation is available at [xxx/docs](https://xxx/docs/).
-
-You can use [GitHub pages](https://guides.github.com/features/pages/) to create your documentation.
-
-See an example here : https://github.com/ThalesGroup/ThalesGroup.github.io
-
-**Please also add the documentation URL into the About section (Website field)**
 
 ## Contributing
 
-If you are interested in contributing to the XXX project, start by reading the [Contributing guide](/CONTRIBUTING.md).
+1. If an issue doesn't exist yet, submit a new issue to explain your change
+2. Fork the project and create a merge request between your forked branch and the master's branch.
+3. Review our coding style to ease the code review.
+4. When you're done, remove the WIP tag and assign the merge request to alice.heliou@thalesgroup.com or vincent.thouvenot@thalesgroup.com
+
+## Authors and acknowledgment
+
+Project Management Committee:
+
+. Yasmine Chaouche (yasmine.chaouche@etu.u-pec.fr) - Main contact
+. Alice Héliou (alice.heliou@thalesgroup.com)
+. Vincent Thouvenot (vincent.thouvenot@thalesgroup.com)
+
+
+Committers:
+
+. Yasmine Chaouche (yasmine.chaouche@etu.u-pec.fr) - Main contact
+. Alice Héliou (alice.heliou@thalesgroup.com)
+. Vincent Thouvenot (vincent.thouvenot@thalesgroup.com)
+
 
 ## License
 
-The chosen license in accordance with legal department must be defined into an explicit [LICENSE](https://github.com/ThalesGroup/template-project/blob/master/LICENSE) file at the root of the repository
-You can also link this file in this README section.
+Repository under the Apache 2.0 license, as found in [LICENSE](./LICENSE) file.
