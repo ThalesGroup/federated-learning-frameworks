@@ -2,7 +2,7 @@
 
 ## Description
 
-This repository contains tests made by Yasmine Chaouche during her intership at ThereSIS on different Federated Learning frameworks ([Flower](https://github.com/adap/flower), [NVFlare](https://github.com/NVIDIA/NVFlare/tree/main) and [EasyFL](https://github.com/EasyFL-AI/EasyFL)).
+This repository contains tests made by Yasmine Chaouche during her internship at ThereSIS on different Federated Learning frameworks ([Flower](https://github.com/adap/flower), [NVFlare](https://github.com/NVIDIA/NVFlare/tree/main) and [EasyFL](https://github.com/EasyFL-AI/EasyFL)).
 
 
 ## Usage
@@ -18,7 +18,7 @@ By mail: alice.heliou@thalesgroup.com, yasmine.chaouche@etu.u-pec.fr, vincent.th
 
 ## Contributing
 
-1. If an issue doesn't exist yet, submit a new issue to explain your change
+1. If an issue doesn't exist yet, submit a new issue to explain your change.
 2. Fork the project and create a merge request between your forked branch and the master's branch.
 3. Review our coding style to ease the code review.
 4. When you're done, remove the WIP tag and assign the merge request to alice.heliou@thalesgroup.com or vincent.thouvenot@thalesgroup.com
@@ -26,17 +26,14 @@ By mail: alice.heliou@thalesgroup.com, yasmine.chaouche@etu.u-pec.fr, vincent.th
 ## Authors and acknowledgment
 
 Project Management Committee:
-
-. Yasmine Chaouche (yasmine.chaouche@etu.u-pec.fr) - Main contact
-. Alice Héliou (alice.heliou@thalesgroup.com)
-. Vincent Thouvenot (vincent.thouvenot@thalesgroup.com)
-
+- Yasmine Chaouche (yasmine.chaouche@etu.u-pec.fr) - Main contact
+- Alice Héliou (alice.heliou@thalesgroup.com)
+- Vincent Thouvenot (vincent.thouvenot@thalesgroup.com)
 
 Committers:
-
-. Yasmine Chaouche (yasmine.chaouche@etu.u-pec.fr) - Main contact
-. Alice Héliou (alice.heliou@thalesgroup.com)
-. Vincent Thouvenot (vincent.thouvenot@thalesgroup.com)
+- Yasmine Chaouche (yasmine.chaouche@etu.u-pec.fr) - Main contact
+- Alice Héliou (alice.heliou@thalesgroup.com)
+- Vincent Thouvenot (vincent.thouvenot@thalesgroup.com)
 
 
 ## License
