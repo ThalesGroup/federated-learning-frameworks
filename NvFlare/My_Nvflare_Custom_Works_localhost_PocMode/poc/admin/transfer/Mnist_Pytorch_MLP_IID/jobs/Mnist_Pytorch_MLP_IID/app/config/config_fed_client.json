@@ -1,0 +1,30 @@
+{
+    "format_version": 2,
+  
+    "executors": [
+      {
+        "tasks": ["train", "submit_model", "get_weights"],
+        "executor": {
+          "path": "Mnisttrainer.MnistTrainer",
+          "args": {
+            "lr": 0.001,
+            "epochs": 5
+          }
+        }
+      },
+      {
+        "tasks": ["validate"],
+        "executor": {
+          "path": "Mnistvalidator.MnistValidator",
+          "args": {
+          }
+        }
+      }
+    ],
+    "task_result_filters": [
+    ],
+    "task_data_filters": [
+    ],
+    "components": [
+    ]
+  }

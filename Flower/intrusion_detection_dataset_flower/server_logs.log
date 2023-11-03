@@ -1,0 +1,133 @@
+2023-08-02 11:53:52.327256: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-08-02 11:53:53.049555: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2023-08-02 11:53:54.943175: E tensorflow/compiler/xla/stream_executor/cuda/cuda_driver.cc:266] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+INFO flwr 2023-08-02 11:53:55,003 | app.py:139 | Starting Flower server, config: ServerConfig(num_rounds=10, round_timeout=None)
+INFO:flwr:Starting Flower server, config: ServerConfig(num_rounds=10, round_timeout=None)
+INFO flwr 2023-08-02 11:53:55,008 | app.py:155 | Flower ECE: gRPC server running (10 rounds), SSL is disabled
+INFO:flwr:Flower ECE: gRPC server running (10 rounds), SSL is disabled
+INFO flwr 2023-08-02 11:53:55,008 | server.py:86 | Initializing global parameters
+INFO:flwr:Initializing global parameters
+INFO flwr 2023-08-02 11:53:55,008 | server.py:270 | Requesting initial parameters from one random client
+INFO:flwr:Requesting initial parameters from one random client
+INFO flwr 2023-08-02 11:53:58,247 | server.py:274 | Received initial parameters from one random client
+INFO:flwr:Received initial parameters from one random client
+INFO flwr 2023-08-02 11:53:58,248 | server.py:88 | Evaluating initial parameters
+INFO:flwr:Evaluating initial parameters
+INFO flwr 2023-08-02 11:53:58,605 | server.py:91 | initial parameters (loss, other metrics): {'Test loss:': 2.566704750061035}, {'Test accuracy:': 0.08228522539138794}
+INFO:flwr:initial parameters (loss, other metrics): {'Test loss:': 2.566704750061035}, {'Test accuracy:': 0.08228522539138794}
+INFO flwr 2023-08-02 11:53:58,605 | server.py:101 | FL starting
+INFO:flwr:FL starting
+DEBUG flwr 2023-08-02 11:54:03,077 | server.py:215 | fit_round 1: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:fit_round 1: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:06,940 | server.py:229 | fit_round 1 received 2 results and 0 failures
+DEBUG:flwr:fit_round 1 received 2 results and 0 failures
+WARNING flwr 2023-08-02 11:54:06,943 | fedavg.py:242 | No fit_metrics_aggregation_fn provided
+WARNING:flwr:No fit_metrics_aggregation_fn provided
+INFO flwr 2023-08-02 11:54:07,181 | server.py:116 | fit progress: (1, {'Test loss:': 2.3110947608947754}, {'Test accuracy:': 0.23001492023468018}, 8.576065903995186)
+INFO:flwr:fit progress: (1, {'Test loss:': 2.3110947608947754}, {'Test accuracy:': 0.23001492023468018}, 8.576065903995186)
+DEBUG flwr 2023-08-02 11:54:07,182 | server.py:165 | evaluate_round 1: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:evaluate_round 1: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:07,364 | server.py:179 | evaluate_round 1 received 2 results and 0 failures
+DEBUG:flwr:evaluate_round 1 received 2 results and 0 failures
+DEBUG flwr 2023-08-02 11:54:07,364 | server.py:215 | fit_round 2: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:fit_round 2: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:09,608 | server.py:229 | fit_round 2 received 2 results and 0 failures
+DEBUG:flwr:fit_round 2 received 2 results and 0 failures
+INFO flwr 2023-08-02 11:54:09,760 | server.py:116 | fit progress: (2, {'Test loss:': 3.4702608585357666}, {'Test accuracy:': 0.24344488978385925}, 11.154957858845592)
+INFO:flwr:fit progress: (2, {'Test loss:': 3.4702608585357666}, {'Test accuracy:': 0.24344488978385925}, 11.154957858845592)
+DEBUG flwr 2023-08-02 11:54:09,760 | server.py:165 | evaluate_round 2: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:evaluate_round 2: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:09,860 | server.py:179 | evaluate_round 2 received 2 results and 0 failures
+DEBUG:flwr:evaluate_round 2 received 2 results and 0 failures
+DEBUG flwr 2023-08-02 11:54:09,860 | server.py:215 | fit_round 3: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:fit_round 3: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:11,884 | server.py:229 | fit_round 3 received 2 results and 0 failures
+DEBUG:flwr:fit_round 3 received 2 results and 0 failures
+INFO flwr 2023-08-02 11:54:12,046 | server.py:116 | fit progress: (3, {'Test loss:': 4.722702980041504}, {'Test accuracy:': 0.2715838849544525}, 13.440431236755103)
+INFO:flwr:fit progress: (3, {'Test loss:': 4.722702980041504}, {'Test accuracy:': 0.2715838849544525}, 13.440431236755103)
+DEBUG flwr 2023-08-02 11:54:12,046 | server.py:165 | evaluate_round 3: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:evaluate_round 3: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:12,161 | server.py:179 | evaluate_round 3 received 2 results and 0 failures
+DEBUG:flwr:evaluate_round 3 received 2 results and 0 failures
+DEBUG flwr 2023-08-02 11:54:12,161 | server.py:215 | fit_round 4: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:fit_round 4: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:14,124 | server.py:229 | fit_round 4 received 2 results and 0 failures
+DEBUG:flwr:fit_round 4 received 2 results and 0 failures
+INFO flwr 2023-08-02 11:54:14,274 | server.py:116 | fit progress: (4, {'Test loss:': 5.929742336273193}, {'Test accuracy:': 0.24962694942951202}, 15.669321912806481)
+INFO:flwr:fit progress: (4, {'Test loss:': 5.929742336273193}, {'Test accuracy:': 0.24962694942951202}, 15.669321912806481)
+DEBUG flwr 2023-08-02 11:54:14,275 | server.py:165 | evaluate_round 4: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:evaluate_round 4: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:14,374 | server.py:179 | evaluate_round 4 received 2 results and 0 failures
+DEBUG:flwr:evaluate_round 4 received 2 results and 0 failures
+DEBUG flwr 2023-08-02 11:54:14,374 | server.py:215 | fit_round 5: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:fit_round 5: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:16,498 | server.py:229 | fit_round 5 received 2 results and 0 failures
+DEBUG:flwr:fit_round 5 received 2 results and 0 failures
+INFO flwr 2023-08-02 11:54:16,665 | server.py:116 | fit progress: (5, {'Test loss:': 7.036769390106201}, {'Test accuracy:': 0.27222341299057007}, 18.059976185671985)
+INFO:flwr:fit progress: (5, {'Test loss:': 7.036769390106201}, {'Test accuracy:': 0.27222341299057007}, 18.059976185671985)
+DEBUG flwr 2023-08-02 11:54:16,665 | server.py:165 | evaluate_round 5: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:evaluate_round 5: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:16,765 | server.py:179 | evaluate_round 5 received 2 results and 0 failures
+DEBUG:flwr:evaluate_round 5 received 2 results and 0 failures
+DEBUG flwr 2023-08-02 11:54:16,765 | server.py:215 | fit_round 6: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:fit_round 6: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:18,773 | server.py:229 | fit_round 6 received 2 results and 0 failures
+DEBUG:flwr:fit_round 6 received 2 results and 0 failures
+INFO flwr 2023-08-02 11:54:18,928 | server.py:116 | fit progress: (6, {'Test loss:': 8.135017395019531}, {'Test accuracy:': 0.27520784735679626}, 20.32264823280275)
+INFO:flwr:fit progress: (6, {'Test loss:': 8.135017395019531}, {'Test accuracy:': 0.27520784735679626}, 20.32264823280275)
+DEBUG flwr 2023-08-02 11:54:18,928 | server.py:165 | evaluate_round 6: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:evaluate_round 6: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:19,119 | server.py:179 | evaluate_round 6 received 2 results and 0 failures
+DEBUG:flwr:evaluate_round 6 received 2 results and 0 failures
+DEBUG flwr 2023-08-02 11:54:19,119 | server.py:215 | fit_round 7: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:fit_round 7: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:21,132 | server.py:229 | fit_round 7 received 2 results and 0 failures
+DEBUG:flwr:fit_round 7 received 2 results and 0 failures
+INFO flwr 2023-08-02 11:54:21,285 | server.py:116 | fit progress: (7, {'Test loss:': 9.470362663269043}, {'Test accuracy:': 0.2573012113571167}, 22.679655390791595)
+INFO:flwr:fit progress: (7, {'Test loss:': 9.470362663269043}, {'Test accuracy:': 0.2573012113571167}, 22.679655390791595)
+DEBUG flwr 2023-08-02 11:54:21,285 | server.py:165 | evaluate_round 7: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:evaluate_round 7: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:21,398 | server.py:179 | evaluate_round 7 received 2 results and 0 failures
+DEBUG:flwr:evaluate_round 7 received 2 results and 0 failures
+DEBUG flwr 2023-08-02 11:54:21,398 | server.py:215 | fit_round 8: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:fit_round 8: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:23,446 | server.py:229 | fit_round 8 received 2 results and 0 failures
+DEBUG:flwr:fit_round 8 received 2 results and 0 failures
+INFO flwr 2023-08-02 11:54:23,604 | server.py:116 | fit progress: (8, {'Test loss:': 10.566594123840332}, {'Test accuracy:': 0.2511191666126251}, 24.99885059799999)
+INFO:flwr:fit progress: (8, {'Test loss:': 10.566594123840332}, {'Test accuracy:': 0.2511191666126251}, 24.99885059799999)
+DEBUG flwr 2023-08-02 11:54:23,604 | server.py:165 | evaluate_round 8: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:evaluate_round 8: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:23,713 | server.py:179 | evaluate_round 8 received 2 results and 0 failures
+DEBUG:flwr:evaluate_round 8 received 2 results and 0 failures
+DEBUG flwr 2023-08-02 11:54:23,713 | server.py:215 | fit_round 9: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:fit_round 9: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:25,728 | server.py:229 | fit_round 9 received 2 results and 0 failures
+DEBUG:flwr:fit_round 9 received 2 results and 0 failures
+INFO flwr 2023-08-02 11:54:25,876 | server.py:116 | fit progress: (9, {'Test loss:': 11.517475128173828}, {'Test accuracy:': 0.2511191666126251}, 27.270425161812454)
+INFO:flwr:fit progress: (9, {'Test loss:': 11.517475128173828}, {'Test accuracy:': 0.2511191666126251}, 27.270425161812454)
+DEBUG flwr 2023-08-02 11:54:25,876 | server.py:165 | evaluate_round 9: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:evaluate_round 9: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:25,984 | server.py:179 | evaluate_round 9 received 2 results and 0 failures
+DEBUG:flwr:evaluate_round 9 received 2 results and 0 failures
+DEBUG flwr 2023-08-02 11:54:25,984 | server.py:215 | fit_round 10: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:fit_round 10: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:27,938 | server.py:229 | fit_round 10 received 2 results and 0 failures
+DEBUG:flwr:fit_round 10 received 2 results and 0 failures
+INFO flwr 2023-08-02 11:54:28,097 | server.py:116 | fit progress: (10, {'Test loss:': 12.503650665283203}, {'Test accuracy:': 0.2658281922340393}, 29.491922116838396)
+INFO:flwr:fit progress: (10, {'Test loss:': 12.503650665283203}, {'Test accuracy:': 0.2658281922340393}, 29.491922116838396)
+DEBUG flwr 2023-08-02 11:54:28,097 | server.py:165 | evaluate_round 10: strategy sampled 2 clients (out of 2)
+DEBUG:flwr:evaluate_round 10: strategy sampled 2 clients (out of 2)
+DEBUG flwr 2023-08-02 11:54:28,203 | server.py:179 | evaluate_round 10 received 2 results and 0 failures
+DEBUG:flwr:evaluate_round 10 received 2 results and 0 failures
+INFO flwr 2023-08-02 11:54:28,203 | server.py:144 | FL finished in 29.597581044770777
+INFO:flwr:FL finished in 29.597581044770777
+INFO flwr 2023-08-02 11:54:28,203 | app.py:205 | app_fit: losses_distributed [(1, 1.0923638939857483), (2, 0.8069971799850464), (3, 0.645729273557663), (4, 0.5400373935699463), (5, 0.4639431983232498), (6, 0.4078216105699539), (7, 0.3646565228700638), (8, 0.32525353133678436), (9, 0.2974238991737366), (10, 0.2719624191522598)]
+INFO:flwr:app_fit: losses_distributed [(1, 1.0923638939857483), (2, 0.8069971799850464), (3, 0.645729273557663), (4, 0.5400373935699463), (5, 0.4639431983232498), (6, 0.4078216105699539), (7, 0.3646565228700638), (8, 0.32525353133678436), (9, 0.2974238991737366), (10, 0.2719624191522598)]
+INFO flwr 2023-08-02 11:54:28,203 | app.py:206 | app_fit: metrics_distributed {'accuracy': [(1, 0.6082497835159302), (2, 0.7689152359962463), (3, 0.8525524139404297), (4, 0.885824978351593), (5, 0.9170464873313904), (6, 0.9320875406265259), (7, 0.9409753978252411), (8, 0.9482680261135101), (9, 0.9484958946704865), (10, 0.9546490609645844)]}
+INFO:flwr:app_fit: metrics_distributed {'accuracy': [(1, 0.6082497835159302), (2, 0.7689152359962463), (3, 0.8525524139404297), (4, 0.885824978351593), (5, 0.9170464873313904), (6, 0.9320875406265259), (7, 0.9409753978252411), (8, 0.9482680261135101), (9, 0.9484958946704865), (10, 0.9546490609645844)]}
+INFO flwr 2023-08-02 11:54:28,203 | app.py:207 | app_fit: losses_centralized [(0, {'Test loss:': 2.566704750061035}), (1, {'Test loss:': 2.3110947608947754}), (2, {'Test loss:': 3.4702608585357666}), (3, {'Test loss:': 4.722702980041504}), (4, {'Test loss:': 5.929742336273193}), (5, {'Test loss:': 7.036769390106201}), (6, {'Test loss:': 8.135017395019531}), (7, {'Test loss:': 9.470362663269043}), (8, {'Test loss:': 10.566594123840332}), (9, {'Test loss:': 11.517475128173828}), (10, {'Test loss:': 12.503650665283203})]
+INFO:flwr:app_fit: losses_centralized [(0, {'Test loss:': 2.566704750061035}), (1, {'Test loss:': 2.3110947608947754}), (2, {'Test loss:': 3.4702608585357666}), (3, {'Test loss:': 4.722702980041504}), (4, {'Test loss:': 5.929742336273193}), (5, {'Test loss:': 7.036769390106201}), (6, {'Test loss:': 8.135017395019531}), (7, {'Test loss:': 9.470362663269043}), (8, {'Test loss:': 10.566594123840332}), (9, {'Test loss:': 11.517475128173828}), (10, {'Test loss:': 12.503650665283203})]
+INFO flwr 2023-08-02 11:54:28,203 | app.py:208 | app_fit: metrics_centralized {'Test accuracy:': [(0, 0.08228522539138794), (1, 0.23001492023468018), (2, 0.24344488978385925), (3, 0.2715838849544525), (4, 0.24962694942951202), (5, 0.27222341299057007), (6, 0.27520784735679626), (7, 0.2573012113571167), (8, 0.2511191666126251), (9, 0.2511191666126251), (10, 0.2658281922340393)]}
+INFO:flwr:app_fit: metrics_centralized {'Test accuracy:': [(0, 0.08228522539138794), (1, 0.23001492023468018), (2, 0.24344488978385925), (3, 0.2715838849544525), (4, 0.24962694942951202), (5, 0.27222341299057007), (6, 0.27520784735679626), (7, 0.2573012113571167), (8, 0.2511191666126251), (9, 0.2511191666126251), (10, 0.2658281922340393)]}
+

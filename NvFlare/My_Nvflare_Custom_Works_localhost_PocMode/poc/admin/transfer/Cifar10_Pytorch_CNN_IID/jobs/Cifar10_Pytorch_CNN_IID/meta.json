@@ -1,0 +1,19 @@
+{
+  "name": "hello-pt",
+  "resource_spec": {
+    "site-1": {
+      "num_of_gpus": 1,
+      "mem_per_gpu_in_GiB": 1
+  },
+  "site-2": {
+      "num_of_gpus": 1,
+      "mem_per_gpu_in_GiB": 1
+  }
+  },
+  "min_clients" : 2,
+  "deploy_map": {
+    "app": [
+      "@ALL"
+    ]
+  }
+}
