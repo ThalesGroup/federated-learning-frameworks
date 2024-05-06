@@ -123,6 +123,6 @@ triton==2.0.0
 typing-extensions==4.6.3
 tzdata==2023.3
 wcwidth==0.2.6
-Werkzeug==3.0.1
+Werkzeug==3.0.3
 wrapt==1.14.1
 zipp==3.15.0
