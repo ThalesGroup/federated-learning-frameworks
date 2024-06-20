@@ -12,6 +12,43 @@ import numpy as np
 
 torch.manual_seed(0)
 np.random.seed(0)
+precision = 2**64
+threshold = 10
+
+def encrypt(val, pk, coef=1):
+    """
+      To deal with negative values, we add threshold to all values.
+      if value+threshold is still negative we replace it by 0
+    """
+    if isinstance(val, np.ndarray):
+        if val.ndim == 1:
+            ret = np.array([str(int(pk.encrypt(int((value.item()+threshold)*precision*coef)).ciphertext())) for value in val], dtype=str)
+            return ret
+        else:
+            return np.array([encrypt(sub_val, pk, coef) for sub_val in val], dtype=str)
+    elif isinstance(val, list):
+        return [encrypt(sub_val, pk, coef) for sub_val in val]
+    else:
+        return str(int(pk.encrypt(int((val+threshold)*precision*coef)).ciphertext()))
+
+def decrypt(val, sk):
+    if isinstance(val, np.ndarray):
+        if val.ndim == 1:
+            dec = np.array([sk.raw_decrypt(int(value))/precision -threshold for value in val]).astype(np.float64)
+            return dec
+        else:
+            return np.array([decrypt(sub_val, sk) for sub_val in val])
+    elif isinstance(val, list):
+        return [decrypt(sub_val, sk) for sub_val in val]
+    else:
+        return sk.raw_decrypt(int(val))/precision - threshold
+    
+    
+def print_first_value(param_array, transformation=False):
+    params_print = param_array.flatten()
+    print(params_print[0])
+    if transformation:
+        print(int((params_print[0] + threshold)*precision))    
 
 
 #Model definition
@@ -78,6 +115,23 @@ class Net(nn.Module):
         x = self.fc2(x)
         x = self.fc3(x)
         return x
+    
+    # def __init__(self):
+    #     super(Net, self).__init__()
+    #     self.flatten = nn.Flatten()
+    #     self.linear_relu_stack = nn.Sequential(
+    #         nn.Linear(784, 128),
+    #         nn.ReLU(),
+    #         nn.Linear(128, 64),
+    #         nn.ReLU(),
+    #         nn.Linear(64, 10)
+    #         ## Softmax layer ignored since the loss function defined is nn.CrossEntropy()
+    #     )
+
+    # def forward(self, x):
+    #     x = self.flatten(x)
+    #     logits = self.linear_relu_stack(x)
+    #     return  logits
     
 # test function
 def test(net, testloader, device: str):

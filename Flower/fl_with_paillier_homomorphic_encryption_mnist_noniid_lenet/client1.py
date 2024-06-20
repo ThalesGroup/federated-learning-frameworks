@@ -17,6 +17,8 @@ import numpy as np
 
 torch.manual_seed(0)
 np.random.seed(0)
+precision = 2**64
+threshold = 10
 
 #Load public-secret key
 with open('keys.pkl', 'rb') as f:
@@ -32,31 +34,6 @@ def KeyGen():
     return pk, sk
 
 
-def encrypt(val, pk, precision):
-    if isinstance(val, np.ndarray):
-        if val.ndim == 1:
-            return np.array([pk.encrypt(int(value * precision)) for value in val])
-        else:
-            return np.array([encrypt(sub_val, pk, precision) for sub_val in val])
-    elif isinstance(val, list):
-        return [encrypt(sub_val, pk, precision) for sub_val in val]
-    else:
-        return pk.encrypt(int(val * precision))
-
-def decrypt(val, sk, precision):
-    if isinstance(val, np.ndarray):
-        if val.ndim == 1:
-            return np.array([sk.decrypt(value) / precision for value in val])
-        else:
-            return np.array([decrypt(sub_val, sk, precision) for sub_val in val])
-    elif isinstance(val, list):
-        return [decrypt(sub_val, sk, precision) for sub_val in val]
-    else:
-        return sk.decrypt(val) / precision
-
-
-
-precision = 2**32
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -90,25 +67,39 @@ validloader = DataLoader(validset, batch_size=32,shuffle=True)
 # Define Flower client
 class FlowerClient(fl.client.NumPyClient):
     def get_parameters(self, config):
-        params=[val.cpu().numpy() for _, val in net.state_dict().items()] #retourner les les paramètres du modèle local
-        enc=encrypt(params,pk,precision)
+        coef=1
+        if 'nb_data' in config.keys():
+            coef = 1/config['nb_data']
+        params=[val.cpu().numpy()for _, val in net.state_dict().items()] 
+        print("get_parameters")
+        print(params[0].shape)
+        utils.print_first_value(params[0], transformation=True)
+        enc=utils.encrypt(params,pk, coef)
+        utils.print_first_value(enc[0])
         return enc
 
     def set_parameters(self, parameters):
-        parameters=decrypt(parameters, sk, precision)
+        print("set parameters")
+        parameters = [p.astype(object) for p in parameters]
+        utils.print_first_value(parameters[0])
+        parameters=utils.decrypt(parameters, sk)
+        utils.print_first_value(parameters[0], transformation=True)
         params_dict = zip(net.state_dict().keys(), parameters)
         state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
         net.load_state_dict(state_dict, strict=True)
 
     def fit(self, parameters, config):
+        print("fit")
         self.set_parameters(parameters)
         
         utils.train(net, trainloader,DEVICE, epochs=1)
-        s=self.get_parameters(config={})
+        config['nb_data']=2
+        s=self.get_parameters(config=config)
 
         return s, len(trainloader.dataset), {}
     #Local test
     def evaluate(self, parameters, config):
+        print("evaluate")
         self.set_parameters(parameters)
         loss, accuracy = utils.test(net, validloader,DEVICE)
         losses.append(loss)
@@ -118,7 +109,7 @@ class FlowerClient(fl.client.NumPyClient):
 
 # Start Flower client
 fl.client.start_numpy_client(
-    server_address="localhost:8081",
+        server_address="server:22222",
     client=FlowerClient(),
     grpc_max_message_length=1024*1024*1024
 )

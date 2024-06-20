@@ -28,7 +28,8 @@ from flwr.server.client_manager import ClientManager
 from flwr.server.client_proxy import ClientProxy
 import numpy as np
 import torch
-
+from phe import paillier
+import utils
 torch.manual_seed(0)
 np.random.seed(0)
 
@@ -41,22 +42,94 @@ def weighted_loss_avg(results: List[Tuple[int, float]]) -> float:
     weighted_losses = [num_examples * loss for num_examples, loss in results]
     return sum(weighted_losses) / num_total_evaluation_examples
 
-def aggregate(results: List[Tuple[NDArrays, int]]) -> NDArrays:
+
+def _weighted_weights(weights, num_examples, public_key):
+    print("_weighted_weights")
+    res = []
+    print(type(weights))
+    for layers in weights:
+        print(type(layers))
+        layers = layers.astype(str)
+        res.append(str_to_enc(layers, public_key, coef=num_examples))
+    return res
+
+def _average_weights(layer_updates, num_total, public_key):
+    print("average_weights", len(layer_updates), num_total)
+    layer_shape = layer_updates[0].shape
+    print()
+    updates = []
+    for update in layer_updates:
+        if update.shape!= layer_shape:
+            print("Layer shape don't not matcht", layer_shape, update.shape)
+            break
+        update_flattened = update.flatten()
+        updates.append(np.array([int(e) for e in update_flattened]))
+        print("layer_update")
+        #utils.print_first_value(updates[-1])
+
+    tot_sum = np.sum(updates, axis=0)# / num_total
+    print("tot_sum", num_total, len(layer_updates), tot_sum[0])
+    return np.array([str(int(e)) for e in tot_sum], dtype=str).reshape(layer_shape)
+    
+def largeint_to_str(w):
+    shape = w.shape
+    w_flattened = w.flatten()
+    print("conversion", w_flattened[0])
+    w_converted = np.array([str(int(e.ciphertext())) for e in w_flattened]).reshape(shape)
+    return w_converted
+
+def str_to_enc(w, public_key, coef=1):
+    shape = w.shape
+    w_flattened = w.flatten()
+    w_converted = np.array([paillier.EncryptedNumber(public_key,int(e))*coef for e in w_flattened]).reshape(shape)
+    return w_converted
+
+def aggregate(results: List[Tuple[NDArrays, int]], public_key) -> NDArrays:
     """Compute weighted average."""
+    print("Aggregation")
     # Calculate the total number of examples used during training
     num_examples_total = sum([num_examples for _, num_examples in results])
-
+    print(num_examples_total, [num_examples for _, num_examples in results])
     # Create a list of weights, each multiplied by the related number of examples
+    # weighted_weights = [
+    #     [layer * num_examples for layer in weights] for weights, num_examples in results
+    # ]
+    # Take into account the fact that we send string and not int because they are too big
+    # weighted_weights = [ ]
+    # for weights, num_examples in results:
+    #     client_weight_encrypted = _weighted_weights(weights, num_examples)
+    #     for _ in range(num_examples):
+    #         weighted_weights.append(client_weight_encrypted)
+
+
+
+    # # Compute average weights of each layer
+    # weights_prime: NDArrays = [
+    #     #reduce(np.add, layer_updates) / num_examples_total
+    #     _average_weights(layer_updates, num_examples_total, public_key)
+    #     for layer_updates in zip(*weighted_weights)
+    # ]
+
+    for weights, num_examples in results:
+        print("weights received")
+        #utils.print_first_value(weights[0])
+        print(num_examples)
     weighted_weights = [
-        [layer * num_examples for layer in weights] for weights, num_examples in results
+        _weighted_weights(weights, 1, public_key) for weights, num_examples in results
     ]
+
 
     # Compute average weights of each layer
     weights_prime: NDArrays = [
-        reduce(np.add, layer_updates) / num_examples_total
+        reduce(np.add, layer_updates) #/ num_examples_total
         for layer_updates in zip(*weighted_weights)
     ]
-    return weights_prime
+    print("weights_prime")
+    #utils.print_first_value(weights_prime[0])
+    weights_prime_converted = [largeint_to_str(layers_prime) for layers_prime in weights_prime]
+    #utils.print_first_value(weights_prime_converted[0])
+
+    return weights_prime_converted
 
 WARNING_MIN_AVAILABLE_CLIENTS_TOO_LOW = """
 Setting `min_available_clients` lower than `min_fit_clients` or
@@ -76,6 +149,7 @@ class FedAvgHE(fl.server.strategy.Strategy):
     def __init__(
         self,
         *,
+        public_key,
         fraction_fit: float = 1.0,
         fraction_evaluate: float = 1.0,
         min_fit_clients: int = 2,
@@ -128,13 +202,13 @@ class FedAvgHE(fl.server.strategy.Strategy):
             Metrics aggregation function, optional.
         """
         super().__init__()
-
+        print("Initiating the strategy")
         if (
             min_fit_clients > min_available_clients
             or min_evaluate_clients > min_available_clients
         ):
             log(WARNING, WARNING_MIN_AVAILABLE_CLIENTS_TOO_LOW)
-
+        self.public_key = public_key
         self.fraction_fit = fraction_fit
         self.fraction_evaluate = fraction_evaluate
         self.min_fit_clients = min_fit_clients
@@ -258,7 +332,7 @@ class FedAvgHE(fl.server.strategy.Strategy):
         #print(weights_results)
 
         
-        parameters_aggregated = ndarrays_to_parameters(aggregate(weights_results))
+        parameters_aggregated = ndarrays_to_parameters(aggregate(weights_results, self.public_key))
 
         # Aggregate custom metrics if aggregation fn was provided
         metrics_aggregated = {}

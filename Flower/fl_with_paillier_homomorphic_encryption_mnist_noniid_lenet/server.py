@@ -14,10 +14,16 @@ from torch.utils.data import DataLoader
 import utils 
 import FedAvgHE
 import numpy as np
+import pickle
 
 torch.manual_seed(0)
 np.random.seed(0)
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+with open('keys.pkl', 'rb') as f:
+    keys = pickle.load(f)
+pk, sk = keys
+
+print("Public Key",pk)
 
 losses = []
 accuracies = []
@@ -63,11 +69,13 @@ def weighted_average(metrics: List[Tuple[int, Metrics]]) -> Metrics:
 
 
 
-strategy = FedAvgHE.FedAvgHE(min_available_clients=2,evaluate_metrics_aggregation_fn=weighted_average)#, evaluate_fn=get_evaluate_fn(test_set)#fl.server.strategy.FedAvg(min_available_clients=2,evaluate_metrics_aggregation_fn=weighted_average, evaluate_fn=get_evaluate_fn(test_set))
+strategy = FedAvgHE.FedAvgHE(min_available_clients=2, public_key=pk, evaluate_metrics_aggregation_fn=weighted_average)#, evaluate_fn=get_evaluate_fn(test_set)#fl.server.strategy.FedAvg(min_available_clients=2,evaluate_metrics_aggregation_fn=weighted_average, evaluate_fn=get_evaluate_fn(test_set))
 
 # Start Flower server
+
+print("Starting the server")
 fl.server.start_server(
-    server_address="localhost:8081",
+        server_address="[::]:22222",
     config=fl.server.ServerConfig(num_rounds=20),
     grpc_max_message_length=1024*1024*1024,
     strategy=strategy
