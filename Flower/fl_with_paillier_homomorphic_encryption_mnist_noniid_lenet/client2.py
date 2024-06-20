@@ -2,18 +2,14 @@
 from collections import OrderedDict
 import flwr as fl
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 from torch.utils.data import DataLoader, Subset
 from sklearn.model_selection import train_test_split
 from torchvision.datasets import MNIST
 from torchvision.transforms import Compose, Normalize, ToTensor
-from tqdm import tqdm
 import utils 
-from phe import paillier
+import model_owner
 import numpy as np
 import pickle
-import numpy as np
 
 torch.manual_seed(0)
 np.random.seed(0)
@@ -21,23 +17,13 @@ precision = 2**64
 threshold = 10
 
 #Load public-secret key
-with open('/my_app/keys.pkl', 'rb') as f:
-    keys = pickle.load(f)
-pk, sk = keys
-
+with open('/my_app/public_key.pkl', 'rb') as f:
+    pk = pickle.load(f)
 print("Public Key",pk)
-
-def KeyGen():
-    public_key, private_key = paillier.generate_paillier_keypair(n_length=128)
-    pk, sk = public_key, private_key
-    return pk, sk
-
-
-
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-net = utils.Net().to(DEVICE)
+net = model_owner.Net().to(DEVICE)
 losses = []
 accuracies = []
 
@@ -83,7 +69,7 @@ class FlowerClient(fl.client.NumPyClient):
         print("set parameters")
         parameters = [p.astype(object) for p in parameters]
         utils.print_first_value(parameters[0])
-        parameters=utils.decrypt(parameters, sk)
+        parameters=model_owner.decrypt(parameters)
         utils.print_first_value(parameters[0], transformation=True)
         params_dict = zip(net.state_dict().keys(), parameters)
         state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
@@ -109,9 +95,9 @@ class FlowerClient(fl.client.NumPyClient):
         return loss, len(validloader.dataset), {"accuracy": accuracy}
 
 # Start Flower client
-fl.client.start_numpy_client(
+fl.client.start_client(
         server_address="server:22222",
-    client=FlowerClient(),
+    client=FlowerClient().to_client(),
     grpc_max_message_length=1024*1024*1024
 )
 print("client2 losses:")

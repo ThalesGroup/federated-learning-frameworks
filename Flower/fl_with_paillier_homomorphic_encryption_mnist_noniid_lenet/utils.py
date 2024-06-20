@@ -1,10 +1,8 @@
-
 from torch.utils.data import DataLoader
 from torchvision.datasets import MNIST
 from torchvision.transforms import Compose, Normalize, ToTensor
 import torch
 from sklearn.model_selection import train_test_split
-import torch.nn as nn 
 from tqdm import tqdm
 import plotly.express as px
 import pandas as pd
@@ -31,108 +29,13 @@ def encrypt(val, pk, coef=1):
     else:
         return str(int(pk.encrypt(int((val+threshold)*precision*coef)).ciphertext()))
 
-def decrypt(val, sk):
-    if isinstance(val, np.ndarray):
-        if val.ndim == 1:
-            dec = np.array([sk.raw_decrypt(int(value))/precision -threshold for value in val]).astype(np.float64)
-            return dec
-        else:
-            return np.array([decrypt(sub_val, sk) for sub_val in val])
-    elif isinstance(val, list):
-        return [decrypt(sub_val, sk) for sub_val in val]
-    else:
-        return sk.raw_decrypt(int(val))/precision - threshold
-    
     
 def print_first_value(param_array, transformation=False):
     params_print = param_array.flatten()
     print(params_print[0])
     if transformation:
         print(int((params_print[0] + threshold)*precision))    
-
-
-#Model definition
-class Net(nn.Module):
-    # def __init__(self):
-    #     super(Net, self).__init__()
-    #     self.fc = nn.Linear(784, 10)
-
-    # def forward(self, x):
-    #     x = x.view(x.size(0), -1)
-    #     x = self.fc(x)
-    #     return x
-
-    
-    # def __init__(self):
-    #     super(Net, self).__init__()
-    #     self.flatten = nn.Flatten()
-    #     self.fc1 = nn.Linear(28*28, 128)
-    #     self.relu1 = nn.ReLU()
-    #     self.fc2 = nn.Linear(128, 256)
-    #     self.relu2 = nn.ReLU()
-    #     self.fc3 = nn.Linear(256, 10)
-    #     self.softmax = nn.Softmax(dim=1)
-
-    # def forward(self, x):
-    #     x = self.flatten(x)
-    #     x = self.fc1(x)
-    #     x = self.relu1(x)
-    #     x = self.fc2(x)
-    #     x = self.relu2(x)
-    #     x = self.fc3(x)
-    #     x = self.softmax(x)
-    #     return x
-
-
-    def __init__(self):
-        super(Net, self).__init__()
-        self.conv1 = nn.Sequential(     
-
-            nn.Conv2d(1, 6, 5, 1, 2),
-            nn.ReLU(),   
-            nn.MaxPool2d(kernel_size=2, stride=2)   
-        )
-        self.conv2 = nn.Sequential(
-            nn.Conv2d(6, 16, 5),
-            nn.ReLU(),    
-            nn.MaxPool2d(2, 2)  
-        )
-        self.fc1 = nn.Sequential(
-            nn.Linear(16 * 5 * 5, 120),
-            nn.ReLU()
-        )
-        self.fc2 = nn.Sequential(
-            nn.Linear(120, 84),
-            nn.ReLU()
-        )
-        self.fc3 = nn.Linear(84, 10)
-
-    def forward(self, x):
-        x = self.conv1(x)
-        x = self.conv2(x)
-        x = x.view(x.size()[0], -1)
-        x = self.fc1(x)
-        x = self.fc2(x)
-        x = self.fc3(x)
-        return x
-    
-    # def __init__(self):
-    #     super(Net, self).__init__()
-    #     self.flatten = nn.Flatten()
-    #     self.linear_relu_stack = nn.Sequential(
-    #         nn.Linear(784, 128),
-    #         nn.ReLU(),
-    #         nn.Linear(128, 64),
-    #         nn.ReLU(),
-    #         nn.Linear(64, 10)
-    #         ## Softmax layer ignored since the loss function defined is nn.CrossEntropy()
-    #     )
-
-    # def forward(self, x):
-    #     x = self.flatten(x)
-    #     logits = self.linear_relu_stack(x)
-    #     return  logits
-    
+ 
 # test function
 def test(net, testloader, device: str):
     criterion = torch.nn.CrossEntropyLoss()
@@ -175,6 +78,7 @@ def load_data():
     test_loader = DataLoader(testset, batch_size=32, shuffle=True)
 
     return train_loader, valid_loader, test_loader
+
 
 #Plot losses and accuracies curves
 def plot_loss_accuracy(losses, accuracies):

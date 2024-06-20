@@ -12,6 +12,7 @@ from torchvision.datasets import MNIST
 from torchvision.transforms import Compose, Normalize, ToTensor
 from torch.utils.data import DataLoader
 import utils 
+import model_owner
 import FedAvgHE
 import numpy as np
 import pickle
@@ -19,10 +20,9 @@ import pickle
 torch.manual_seed(0)
 np.random.seed(0)
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-with open('keys.pkl', 'rb') as f:
-    keys = pickle.load(f)
-pk, sk = keys
-
+#Load public-secret key
+with open('/my_app/public_key.pkl', 'rb') as f:
+    pk = pickle.load(f)
 print("Public Key",pk)
 
 losses = []
@@ -42,7 +42,7 @@ def get_evaluate_fn(testset: MNIST,) -> Callable[[fl.common.NDArrays], Optional[
 
         # determine device
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        model = utils.Net()
+        model = model_owner.Net()
         set_params(model, parameters)
         model.to(device)
 

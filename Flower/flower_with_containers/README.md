@@ -12,7 +12,7 @@ Create a docker file and run:
 Warning : If you are behind a corporate proxy, you will need to pass the proxy variables
 
 
-        docker build --build-arg  http_proxy=$HTTP_PROXY --build-arg  https_proxy=$HTTPS_PROXY --build-arg no_proxy=$NO_PROXY -t flower-image .
+        docker build --build-arg  http_proxy=$HTTP_PROXY --build-arg  https_proxy=$HTTPS_PROXY,server --build-arg no_proxy=$NO_PROXY,server -t flower-image .
     
 ## 3- We create a docker network and launch 3 containers on it : 
 
@@ -53,22 +53,25 @@ Server:
 
 ```
     docker exec -it server bash
+    source .venv/bin/activate
     cd /app
-    python3 server.py
+    python server.py
 ```
 
 Client1:
 
 ```
     docker exec -it client1 bash
+    source .venv/bin/activate
     cd /app
-    python3 client1.py
+    python client1.py
 ```
     
 Client2:
 
 ```
     docker exec -it client2 bash
+    source .venv/bin/activate
     cd /app
-    python3 client2.py
+    python client2.py
 ```
