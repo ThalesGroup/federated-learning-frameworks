@@ -45,4 +45,4 @@ class FlowerClient(fl.client.NumPyClient):
         return loss, len(x_vld), {"accuracy" :accuracy}
 
 # Start Flower client
-fl.client.start_numpy_client(server_address="localhost:8081", client=FlowerClient(), grpc_max_message_length = 1024*1024*1024)
+fl.client.start_client(server_address="localhost:8081", client=FlowerClient().to_client(), grpc_max_message_length = 1024*1024*1024)

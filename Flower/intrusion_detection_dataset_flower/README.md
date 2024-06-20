@@ -4,6 +4,8 @@ The dataset used is part of the [IEC 60870-5-104 Intrusion Detection Dataset](ht
 
 We choosed to use the IDDataset/Balanced_IEC104_Train_Test_CSV_Files/iec104_train_test_csvs/tests_cic_15 path which contains both train and test datasets (It's up to you to choose the part you want, but you'll need to adapt it with a custom preprocessing that you'll also have to implement.)
 
+We are using python3.12, with the requirements in flower_with_containers/requirements.txt
+
 We are using two clients and a server, with the FedAvg strategy. 
 
     python server.py

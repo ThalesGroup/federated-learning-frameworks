@@ -8,7 +8,7 @@ We use Mnist dataset with an IID partition and a CNN model.
 
 NB_local_epoch=1, Nb_Rounds=10, len_train_data=30000. Delta=1e-5. 
 
-
+We are using python3.12, with the requirements in flower_with_containers/requirements.txt
 
 run:
 

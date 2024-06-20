@@ -121,7 +121,7 @@ if dpsgd and x_train.shape[0] % batch_size != 0:
 print("------", len(x_train), len(x_test))
 # Start Flower client
 client = MnistClient(model, x_train, y_train, x_test, y_test,batch_size,local_epochs,dpsgd)
-fl.client.start_numpy_client(server_address="127.0.0.1:8080", client=client)
+fl.client.start_client(server_address="127.0.0.1:8080", client=client.to_client())
 if dpsgd:
     print("Privacy Loss: ", PRIVACY_LOSS)
 

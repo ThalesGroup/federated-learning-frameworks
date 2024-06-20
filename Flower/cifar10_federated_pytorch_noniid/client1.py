@@ -65,9 +65,9 @@ class FlowerClient(fl.client.NumPyClient):
         return loss, len(validloader.dataset), {"accuracy": accuracy}
 
 # Start Flower client
-fl.client.start_numpy_client(
+fl.client.start_client(
     server_address="localhost:8081",
-    client=FlowerClient(),
+    client=FlowerClient().to_client(),
     grpc_max_message_length=1024*1024*1024
 )
 print("client1 losses:")

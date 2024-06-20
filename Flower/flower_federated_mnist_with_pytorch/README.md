@@ -1,8 +1,6 @@
 This is my implementation of real-federated Mnist_CNN in pytorch based on flower framework.
 
-python version: 3.9
-
-        pip -r install requirements_flower_env3.9.txt
+We are using python3.12, with the requirements in flower_with_containers/requirements.txt
 
 - We use an IID partition of datasets (train, valid (to test locally clients's models) and test (to test the global model via the server)).
 
