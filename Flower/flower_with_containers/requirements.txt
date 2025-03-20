@@ -1,7 +1,7 @@
 flwr==1.9.0
 grpcio==1.64.1
 kaleido==0.2.1
-keras==3.3.3
+keras==3.9.0
 matplotlib==3.9.0
 numpy==1.26.4
 pandas==2.2.2
