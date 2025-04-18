@@ -14,7 +14,7 @@ scikit-learn==1.5.0
 scipy==1.13.1
 seaborn==0.13.2
 tensorflow==2.16.1
-torch==2.3.1
+torch==2.6.0
 torchvision==0.18.1
 tqdm==4.66.4
 urllib3==2.2.2
